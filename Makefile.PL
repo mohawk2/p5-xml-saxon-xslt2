@@ -2,7 +2,12 @@ use strict;
 use warnings;
 
 use inc::Module::Install;
-no_auto_test;
+
+unless (-e '/usr/share/java/saxon9he.jar' or -e '/usr/local/share/java/saxon9he.jar')
+{
+	warn "Need saxon9he.jar in /usr/share/java or /usr/local/share/java.";
+	exit 0;
+}
 
 my $dist = 'XML-Saxon-XSLT2';
 my $fn   = "lib/$dist.pm"; $fn =~ s#-#/#g;

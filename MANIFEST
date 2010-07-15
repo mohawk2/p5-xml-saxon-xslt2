@@ -20,7 +20,6 @@ inc/Module/Install/Makefile.pm
 inc/Module/Install/Can.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/WriteAll.pm
-inc/Module/Install/NoAutomatedTesting.pm
 inc/Module/Install/Include.pm
 inc/Module/Install/ReadmeFromPod.pm
 inc/Module/Install/DOAPChangeSets.pm
