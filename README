@@ -2,7 +2,7 @@ NAME
     XML::Saxon::XSLT2 - process XSLT 2.0 using Saxon 9.x.
 
 SYNOPSIS
-     my $trans  = XML::Saxon::XSLT2->new( $xslt );
+     my $trans  = XML::Saxon::XSLT2->new($xslt, $baseurl);
      my $output = $trans->transform($input);
 
 DESCRIPTION
@@ -17,9 +17,11 @@ DESCRIPTION
     save it to one of the two directories above.
 
   Constructor
-    "XML::Saxon::XSLT2->new($xslt)"
+    "XML::Saxon::XSLT2->new($xslt, [$baseurl])"
         Creates a new transformation. $xslt may be a string, a file handle
-        or an XML::LibXML::Document.
+        or an XML::LibXML::Document. $baseurl is an optional base URL for
+        resolving relative URL references in, for instance, <xsl:import>
+        links. Otherwise, the current directory is assumed to be the base.
 
   Methods
     "$trans->parameters($key=>$value, $key2=>$value2, ...)"
@@ -45,35 +47,31 @@ DESCRIPTION
         double, long (alias int, integer), decimal, bool (alias boolean),
         string, qname, uri, date, datetime. These are case-insensitive.
 
-    "$trans->transform($doc, $type)"
+    "$trans->transform($doc, [$output_method])"
         Run a transformation, returning the output as a string.
 
         $doc may be a string, a file handle or an XML::LibXML::Document.
 
-        $type may be 'xml', 'xhtml', 'html' or 'text' to set the output
-        mode. 'xml' is the default.
+        $output_method may be 'xml', 'xhtml', 'html' or 'text' to override
+        the XSLT output method.
 
-    "$trans->transform_document($doc, $type)"
+    "$trans->transform_document($doc, [$output_method])"
         Run a transformation, returning the output as an
         XML::LibXML::Document.
 
         $doc may be a string, a file handle or an XML::LibXML::Document.
 
-        $type may be 'xml', 'xhtml', 'html' or 'text' to set the output
-        mode. 'xml' is the default.
+        $output_method may be 'xml', 'xhtml', 'html' or 'text' to override
+        the XSLT output method.
 
         This method is slower than "transform".
 
+    "$trans->messages"
+        Returns a list of string representations of messages output by
+        <xsl:message> during the last transformation run.
+
 BUGS
     Please report any bugs to <http://rt.cpan.org/>.
-
-    Known limitations:
-
-    *   xsl:message
-
-        Saxon outputs messages written via <xsl:message> to STDERR. There
-        doesn't seem to be any way to capture and return these messages (not
-        even using Capture::Tiny or its ilk).
 
 SEE ALSO
     "XML::LibXSLT" is probably more reliable, and allows you to define your

@@ -21,6 +21,31 @@
     <revision rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0.001</revision>
     <rdfs:label xml:lang="en">Original version</rdfs:label>
   </Version>
+  <Version rdf:about="http://purl.org/NET/cpan-uri/dist/XML-Saxon-XSLT2/v_0-002">
+    <dcs:changeset>
+      <rdf:Description>
+        <dcs:item>
+          <dcs:Addition>
+            <rdfs:label xml:lang="en">Can capture output from &lt;xsl:message&gt;.</rdfs:label>
+          </dcs:Addition>
+        </dcs:item>
+        <dcs:item>
+          <dcs:Addition>
+            <rdfs:label xml:lang="en">Can specify a base URI in the constructor.</rdfs:label>
+          </dcs:Addition>
+        </dcs:item>
+        <dcs:item>
+          <rdf:Description>
+            <rdfs:label xml:lang="en">No longer default to 'xml' output method, but respect XSLT's specified output method.</rdfs:label>
+          </rdf:Description>
+        </dcs:item>
+        <dcs:versus rdf:resource="http://purl.org/NET/cpan-uri/dist/XML-Saxon-XSLT2/v_0-001"/>
+      </rdf:Description>
+    </dcs:changeset>
+    <dc:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-07-15</dc:issued>
+    <file-release rdf:resource="http://backpan.cpan.org/authors/id/T/TO/TOBYINK/XML-Saxon-XSLT2-0.002.tar.gz"/>
+    <revision rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0.002</revision>
+  </Version>
   <Project rdf:about="http://purl.org/NET/cpan-uri/dist/XML-Saxon-XSLT2/project">
     <bug-database rdf:resource="http://rt.cpan.org/Dist/Display.html?Queue=XML-Saxon-XSLT2"/>
     <created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-07-14</created>
@@ -33,6 +58,7 @@
     <name>XML-Saxon-XSLT2</name>
     <programming-language>Perl</programming-language>
     <release rdf:resource="http://purl.org/NET/cpan-uri/dist/XML-Saxon-XSLT2/v_0-001"/>
+    <release rdf:resource="http://purl.org/NET/cpan-uri/dist/XML-Saxon-XSLT2/v_0-002"/>
     <repository>
       <SVNRepository>
         <browse rdf:resource="http://goddamn.co.uk/viewvc/perlmods/XML-Saxon-XSLT2/"/>

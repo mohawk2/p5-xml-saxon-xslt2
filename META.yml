@@ -31,4 +31,4 @@ resources:
   homepage: http://search.cpan.org/dist/XML-Saxon-XSLT2/
   license: http://dev.perl.org/licenses/
   repository: http://goddamn.co.uk/viewvc/perlmods/XML-Saxon-XSLT2/
-version: 0.001
+version: 0.002

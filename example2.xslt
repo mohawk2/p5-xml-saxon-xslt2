@@ -9,6 +9,7 @@
             <author id="{@author}"/>
         </xsl:for-each>
     </authors>
+    <xsl:message><foo>Hello world</foo></xsl:message>
 </xsl:variable>
 <xsl:copy-of select="$allauthors"/>
 </xsl:template>

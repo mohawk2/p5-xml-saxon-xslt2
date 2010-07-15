@@ -2,11 +2,13 @@ package XML::Saxon::XSLT2;
 
 use 5.008;
 use common::sense;
-use Carp;
-use Scalar::Util qw[blessed];
-use IO::Handle;
 
-our $VERSION = '0.001';
+use Carp;
+use IO::Handle;
+use Scalar::Util qw[blessed];
+use XML::LibXML;
+
+our $VERSION = '0.002';
 my $classpath;
 
 BEGIN
@@ -21,50 +23,17 @@ use Inline Java => 'DATA', CLASSPATH=>$classpath;
 
 sub new
 {
-	my ($class, $xslt) = @_;
+	my ($class, $xslt, $baseurl) = @_;
 	$xslt = $class->_xml($xslt);
-	return bless { 'transformer' => XML::Saxon::XSLT2::Transformer->new($xslt) }, $class;
-}
-
-sub transform
-{
-	my ($self, $doc, $type) = @_;
-	$type ||= 'xml';
-	$doc = $self->_xml($doc);
-	return $self->{'transformer'}->transform($doc, $type);
-}
-
-sub transform_document
-{
-	my $self = shift;
-	my $r    = $self->transform(@_);
 	
-	$self->{'parser'} ||= XML::LibXML->new;
-	return $self->{'parser'}->parse_string($r);
-}
-
-sub _xml
-{
-	my ($proto, $xml) = @_;
-	
-	if (blessed($xml) && $xml->isa('XML::LibXML::Document'))
+	if ($baseurl)
 	{
-		return $xml->toString;
+		return bless { 'transformer' => XML::Saxon::XSLT2::Transformer->new($xslt, $baseurl) }, $class;
 	}
-	elsif (blessed($xml) && $xml->isa('IO::Handle'))
+	else
 	{
-		local $/;
-		my $str = <$xml>;
-		return $str;
+		return bless { 'transformer' => XML::Saxon::XSLT2::Transformer->new($xslt) }, $class;
 	}
-	elsif (ref $xml eq 'GLOB')
-	{
-		local $/;
-		my $str = <$xml>;
-		return $str;
-	}
-	
-	return $xml;
 }
 
 sub parameters
@@ -115,6 +84,53 @@ sub parameters
 	return $self;
 }
 
+sub transform
+{
+	my ($self, $doc, $type) = @_;
+	$type = ($type =~ /^(text|html|xhtml|xml)$/i) ? (lc $type) : '';
+	$doc  = $self->_xml($doc);
+	return $self->{'transformer'}->transform($doc, $type);
+}
+
+sub transform_document
+{
+	my $self = shift;
+	my $r    = $self->transform(@_);
+	
+	$self->{'parser'} ||= XML::LibXML->new;
+	return $self->{'parser'}->parse_string($r);
+}
+
+sub messages
+{
+	my $self = shift;
+	return @{ $self->{'transformer'}->messages };
+}
+
+sub _xml
+{
+	my ($proto, $xml) = @_;
+	
+	if (blessed($xml) && $xml->isa('XML::LibXML::Document'))
+	{
+		return $xml->toString;
+	}
+	elsif (blessed($xml) && $xml->isa('IO::Handle'))
+	{
+		local $/;
+		my $str = <$xml>;
+		return $str;
+	}
+	elsif (ref $xml eq 'GLOB')
+	{
+		local $/;
+		my $str = <$xml>;
+		return $str;
+	}
+	
+	return $xml;
+}
+
 1;
 
 =head1 NAME
@@ -123,7 +139,7 @@ XML::Saxon::XSLT2 - process XSLT 2.0 using Saxon 9.x.
 
 =head1 SYNOPSIS
 
- my $trans  = XML::Saxon::XSLT2->new( $xslt );
+ my $trans  = XML::Saxon::XSLT2->new($xslt, $baseurl);
  my $output = $trans->transform($input);
 
 =head1 DESCRIPTION
@@ -140,10 +156,12 @@ extract saxon9he.jar and save it to one of the two directories above.
 
 =over 4
 
-=item C<< XML::Saxon::XSLT2->new($xslt) >>
+=item C<< XML::Saxon::XSLT2->new($xslt, [$baseurl]) >>
 
 Creates a new transformation. $xslt may be a string, a file handle or an
-L<XML::LibXML::Document>.
+L<XML::LibXML::Document>. $baseurl is an optional base URL for resolving
+relative URL references in, for instance, E<lt>xsl:importE<gt> links.
+Otherwise, the current directory is assumed to be the base.
 
 =back
 
@@ -175,43 +193,36 @@ The following types are supported via the arrayref notation: float, double,
 long (alias int, integer), decimal, bool (alias boolean), string, qname, uri,
 date, datetime. These are case-insensitive.
 
-=item C<< $trans->transform($doc, $type) >>
+=item C<< $trans->transform($doc, [$output_method]) >>
 
 Run a transformation, returning the output as a string.
 
 $doc may be a string, a file handle or an L<XML::LibXML::Document>.
 
-$type may be 'xml', 'xhtml', 'html' or 'text' to set the output mode. 'xml' is
-the default.
+$output_method may be 'xml', 'xhtml', 'html' or 'text' to override
+the XSLT output method.
 
-=item C<< $trans->transform_document($doc, $type) >>
+=item C<< $trans->transform_document($doc, [$output_method]) >>
 
 Run a transformation, returning the output as an L<XML::LibXML::Document>.
 
 $doc may be a string, a file handle or an L<XML::LibXML::Document>.
 
-$type may be 'xml', 'xhtml', 'html' or 'text' to set the output mode. 'xml' is
-the default.
+$output_method may be 'xml', 'xhtml', 'html' or 'text' to override
+the XSLT output method.
 
 This method is slower than C<transform>.
+
+=item C<< $trans->messages >>
+
+Returns a list of string representations of messages output by
+E<lt>xsl:messageE<gt> during the last transformation run.
 
 =back
 
 =head1 BUGS
 
 Please report any bugs to L<http://rt.cpan.org/>.
-
-Known limitations:
-
-=over 4
-
-=item * B<xsl:message>
-
-Saxon outputs messages written via E<lt>xsl:messageE<gt> to STDERR. There
-doesn't seem to be any way to capture and return these messages (not even using
-L<Capture::Tiny> or its ilk).
-
-=back
 
 =head1 SEE ALSO
 
@@ -264,6 +275,7 @@ public class Transformer
 	private XsltExecutable xslt;
 	private Processor proc;
 	private HashMap<String, XdmAtomicValue> params;
+	public List messagelist;
 
 	public Transformer (String stylesheet)
 		throws SaxonApiException
@@ -272,6 +284,17 @@ public class Transformer
 		XsltCompiler comp = proc.newXsltCompiler();
 		xslt = comp.compile(new StreamSource(new StringReader(stylesheet)));
 		params = new HashMap<String, XdmAtomicValue>();
+		messagelist = new ArrayList();
+	}
+	
+	public Transformer (String stylesheet, String baseuri)
+		throws SaxonApiException
+	{
+		proc = new Processor(false);
+		XsltCompiler comp = proc.newXsltCompiler();
+		xslt = comp.compile(new StreamSource(new StringReader(stylesheet), baseuri));
+		params = new HashMap<String, XdmAtomicValue>();
+		messagelist = new ArrayList();
 	}
 	
 	public void paramAddString (String key, String value)
@@ -345,6 +368,11 @@ public class Transformer
 	{
 		params.clear();
 	}
+	
+	public Object[] messages ()
+	{
+		return messagelist.toArray();
+	}
 
 	public String transform (String doc, String method)
 		throws SaxonApiException
@@ -357,11 +385,15 @@ public class Transformer
 		trans.setInitialContextNode(source);
 
 		Serializer out = new Serializer();
-		out.setOutputProperty(Serializer.Property.METHOD, method);
 		StringWriter sw = new StringWriter();
 		out.setOutputWriter(sw);
 		trans.setDestination(out);
-		
+
+		if (method != "")
+		{
+			out.setOutputProperty(Serializer.Property.METHOD, method);
+		}
+
 		Iterator i = params.keySet().iterator();
 		while (i.hasNext())
 		{
@@ -370,6 +402,15 @@ public class Transformer
 			
 			trans.setParameter(new QName(k.toString()), v);
 		}
+
+		messagelist.clear();
+		trans.setMessageListener(
+			new MessageListener() {
+				public void message(XdmNode content, boolean terminate, SourceLocator locator) {
+					messagelist.add(content.toString());
+				}
+			}
+		);
 
 		trans.transform();
 		
