@@ -1,0 +1,91 @@
+NAME
+    XML::Saxon::XSLT2 - process XSLT 2.0 using Saxon 9.x.
+
+SYNOPSIS
+     my $trans  = XML::Saxon::XSLT2->new( $xslt );
+     my $output = $trans->transform($input);
+
+DESCRIPTION
+    This module implements XSLT 1.0 and 2.0 using Saxon 9.x via
+    Inline::Java.
+
+    It expects Saxon to be installed in either
+    '/usr/share/java/saxon9he.jar' or '/usr/local/share/java/saxon9he.jar'.
+    Future versions should be more flexible. The saxon9he.jar file can be
+    found at <http://saxon.sourceforge.net/> - just dowload the latest Java
+    release of Saxon-HE 9.x, open the Zip archive, extract saxon9he.jar and
+    save it to one of the two directories above.
+
+  Constructor
+    "XML::Saxon::XSLT2->new($xslt)"
+        Creates a new transformation. $xslt may be a string, a file handle
+        or an XML::LibXML::Document.
+
+  Methods
+    "$trans->parameters($key=>$value, $key2=>$value2, ...)"
+        Sets transformation parameters prior to running the transformation.
+
+        Each key is a parameter name.
+
+        Each value is the parameter value. This may be a scalar, in which
+        case it's treated as an xs:string; a DateTime object, which is
+        treated as an xs:dateTime; a URI object, xs:anyURI; a Math::BigInt,
+        xs:long; or an arrayref where the first element is the type and the
+        second the value. For example:
+
+         $trans->parameters(
+            now           => DateTime->now,
+            madrid_is_capital_of_spain => [ boolean => 1 ],
+            price_of_fish => [ decimal => '1.99' ],
+            my_link       => URI->new('http://example.com/'),
+            your_link     => [ uri => 'http://example.net/' ],
+            );
+
+        The following types are supported via the arrayref notation: float,
+        double, long (alias int, integer), decimal, bool (alias boolean),
+        string, qname, uri, date, datetime. These are case-insensitive.
+
+    "$trans->transform($doc, $type)"
+        Run a transformation, returning the output as a string.
+
+        $doc may be a string, a file handle or an XML::LibXML::Document.
+
+        $type may be 'xml', 'xhtml', 'html' or 'text' to set the output
+        mode. 'xml' is the default.
+
+    "$trans->transform_document($doc, $type)"
+        Run a transformation, returning the output as an
+        XML::LibXML::Document.
+
+        $doc may be a string, a file handle or an XML::LibXML::Document.
+
+        $type may be 'xml', 'xhtml', 'html' or 'text' to set the output
+        mode. 'xml' is the default.
+
+        This method is slower than "transform".
+
+BUGS
+    Please report any bugs to <http://rt.cpan.org/>.
+
+    Known limitations:
+
+    *   xsl:message
+
+        Saxon outputs messages written via <xsl:message> to STDERR. There
+        doesn't seem to be any way to capture and return these messages (not
+        even using Capture::Tiny or its ilk).
+
+SEE ALSO
+    "XML::LibXSLT" is probably more reliable, and allows you to define your
+    own XSLT extension functions. However, the libxslt library that it's
+    based on only supports XSLT 1.0.
+
+AUTHOR
+    Toby Inkster <tobyink@cpan.org>.
+
+COPYRIGHT
+    Copyright 2010 Toby Inkster
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+

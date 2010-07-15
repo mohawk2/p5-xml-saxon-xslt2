@@ -2,8 +2,9 @@ use strict;
 use warnings;
 
 use inc::Module::Install;
+no_auto_test;
 
-my $dist = 'Example-Example';
+my $dist = 'XML-Saxon-XSLT2';
 my $fn   = "lib/$dist.pm"; $fn =~ s#-#/#g;
 
 name                $dist;
@@ -16,13 +17,12 @@ license             'perl';
 
 test_requires       'Test::More' => '0.61';
 
+requires            'common::sense'      => 0;
 requires            'Carp'               => '1.00';
-requires            'DateTime'           => 0;
-requires            'RDF::Trine'         => '0.112';
+requires            'Inline::Java'       => 0;
+requires            'IO::Handle'         => 0;
+requires            'Scalar::Util'       => 0;
 requires            'XML::LibXML'        => '1.60';
-requires            'URI'                => '1.30';
-
-# install_script 'fingerw';
 
 resources(
 	'homepage'   => "http://search.cpan.org/dist/$dist/",

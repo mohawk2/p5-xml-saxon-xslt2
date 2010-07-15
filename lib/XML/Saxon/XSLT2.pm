@@ -119,7 +119,7 @@ sub parameters
 
 =head1 NAME
 
-XML::Saxon::XSLT2 - process XSLT 2.0 using Saxon 9.
+XML::Saxon::XSLT2 - process XSLT 2.0 using Saxon 9.x.
 
 =head1 SYNOPSIS
 
@@ -128,11 +128,13 @@ XML::Saxon::XSLT2 - process XSLT 2.0 using Saxon 9.
 
 =head1 DESCRIPTION
 
-This module implements XSLT 1.0 and 2.0 using Saxon 9 via L<Inline::Java>.
+This module implements XSLT 1.0 and 2.0 using Saxon 9.x via L<Inline::Java>.
 
 It expects Saxon to be installed in either '/usr/share/java/saxon9he.jar'
 or '/usr/local/share/java/saxon9he.jar'. Future versions should be more
-flexible.
+flexible. The saxon9he.jar file can be found at L<http://saxon.sourceforge.net/> -
+just dowload the latest Java release of Saxon-HE 9.x, open the Zip archive,
+extract saxon9he.jar and save it to one of the two directories above.
 
 =head2 Constructor
 
@@ -198,6 +200,18 @@ This method is slower than C<transform>.
 =head1 BUGS
 
 Please report any bugs to L<http://rt.cpan.org/>.
+
+Known limitations:
+
+=over 4
+
+=item * B<xsl:message>
+
+Saxon outputs messages written via E<lt>xsl:messageE<gt> to STDERR. There
+doesn't seem to be any way to capture and return these messages (not even using
+L<Capture::Tiny> or its ilk).
+
+=back
 
 =head1 SEE ALSO
 
@@ -302,7 +316,7 @@ public class Transformer
 	}
 
 	public void paramAddDate (String key, String value)
-		throws net.sf.saxon.s9api.SaxonApiException
+		throws SaxonApiException
 	{
 		ItemTypeFactory itf = new ItemTypeFactory(proc);
 		ItemType dateType = itf.getAtomicType(new QName("http://www.w3.org/2001/XMLSchema", "date"));
@@ -310,7 +324,7 @@ public class Transformer
 	}
 
 	public void paramAddDateTime (String key, String value)
-		throws net.sf.saxon.s9api.SaxonApiException
+		throws SaxonApiException
 	{
 		ItemTypeFactory itf = new ItemTypeFactory(proc);
 		ItemType dateTimeType = itf.getAtomicType(new QName("http://www.w3.org/2001/XMLSchema", "datetime"));

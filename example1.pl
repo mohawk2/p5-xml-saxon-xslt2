@@ -1,3 +1,5 @@
+#!/usr/bin/perl
+
 use lib "lib";
 use XML::Saxon::XSLT2;
 
