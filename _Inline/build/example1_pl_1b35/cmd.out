@@ -1,0 +1,4 @@
+Transformer.java:56: cannot return a value from method whose result type is void
+		return sw.toString();
+		                  ^
+1 error

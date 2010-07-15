@@ -1,0 +1,6 @@
+Transformer.java:56: cannot find symbol
+symbol  : method OuterXML()
+location: class net.sf.saxon.s9api.XdmNode
+		return out.getXdmNode().OuterXML();
+		                       ^
+1 error

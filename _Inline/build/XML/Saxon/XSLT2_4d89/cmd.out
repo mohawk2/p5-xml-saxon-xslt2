@@ -1,0 +1,11 @@
+Transformer.java:85: cannot find symbol
+symbol  : variable Type
+location: class Transformer
+		params.put(key, new XdmAtomicValue(value, Type.DATE));
+		                                          ^
+Transformer.java:90: cannot find symbol
+symbol  : variable Type
+location: class Transformer
+		params.put(key, new XdmAtomicValue(value, Type.DATETIME));
+		                                          ^
+2 errors

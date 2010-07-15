@@ -1,0 +1,10 @@
+Transform.java:2: package net.sf.saxon.option.dom4j does not exist
+import net.sf.saxon.option.dom4j.DOM4JObjectModel;
+                                ^
+Transform.java:3: package net.sf.saxon.option.jdom does not exist
+import net.sf.saxon.option.jdom.JDOMObjectModel;
+                               ^
+Transform.java:4: package net.sf.saxon.option.xom does not exist
+import net.sf.saxon.option.xom.XOMObjectModel;
+                              ^
+3 errors

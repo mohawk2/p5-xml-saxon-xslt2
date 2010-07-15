@@ -1,0 +1,9 @@
+Transformer.java:42: cannot find symbol
+symbol  : variable proc
+location: class Transformer
+		XdmNode source = proc.newDocumentBuilder().build(new StreamSource(new StringReader(doc)));
+		                 ^
+Transformer.java:53: cannot return a value from method whose result type is void
+		return sw.toString();
+		                  ^
+2 errors

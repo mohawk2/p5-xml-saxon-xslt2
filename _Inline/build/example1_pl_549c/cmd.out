@@ -1,0 +1,11 @@
+Transformer.java:40: cannot find symbol
+symbol  : class XmlDestination
+location: class Transformer
+	public XmlDestination run (String doc)
+	       ^
+Transformer.java:47: cannot find symbol
+symbol  : class XmkDestination
+location: class Transformer
+		XdmDestination out = new XmkDestination();
+		                         ^
+2 errors

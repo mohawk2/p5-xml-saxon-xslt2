@@ -1,0 +1,6 @@
+Transformer.java:54: cannot find symbol
+symbol  : variable XdmNode
+location: class net.sf.saxon.s9api.XdmDestination
+		System.out.println(">>>> "+out.XdmNode);
+		                              ^
+1 error

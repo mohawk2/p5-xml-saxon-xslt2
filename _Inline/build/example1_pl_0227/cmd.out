@@ -1,0 +1,11 @@
+Transformer.java:54: cannot find symbol
+symbol  : variable sw
+location: class Transformer
+		System.out.println(">>>> " + sw.getXdmNode());
+		                             ^
+Transformer.java:56: cannot find symbol
+symbol  : variable sw
+location: class Transformer
+		return sw.getXdmNode();
+		       ^
+2 errors
