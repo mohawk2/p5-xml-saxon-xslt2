@@ -1,4 +1,0 @@
-Transformer.java:119: setParameter(net.sf.saxon.s9api.QName,net.sf.saxon.s9api.XdmValue) in net.sf.saxon.s9api.XsltTransformer cannot be applied to (net.sf.saxon.s9api.QName,java.lang.Object)
-			trans.setParameter(new QName(k.toString()), v);
-			     ^
-1 error

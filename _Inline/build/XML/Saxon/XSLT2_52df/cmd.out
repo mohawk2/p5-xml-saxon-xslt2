@@ -1,6 +1,0 @@
-Transformer.java:77: incompatible types
-found   : java.lang.Object
-required: java.lang.String
-			String k = i.next();
-			                 ^
-1 error

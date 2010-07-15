@@ -1,4 +1,0 @@
-Transformer.java:54: illegal character: \35
-#		System.out.println(">>>> " + out.getXdmNode());
-^
-1 error

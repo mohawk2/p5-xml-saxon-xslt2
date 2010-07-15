@@ -1,4 +1,0 @@
-Transformer.java:74: unreported exception java.net.URISyntaxException; must be caught or declared to be thrown
-		params.put(key, new XdmAtomicValue(new URI(value.toString())));
-		                                   ^
-1 error

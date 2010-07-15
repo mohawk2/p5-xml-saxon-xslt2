@@ -1,7 +1,0 @@
-Transformer.java:80: ')' expected
-			System.out.println(">>> " + k + " => " + v "\n");
-			                                          ^
-Transformer.java:80: illegal start of expression
-			System.out.println(">>> " + k + " => " + v "\n");
-			                                               ^
-2 errors

@@ -1,6 +1,0 @@
-Transformer.java:56: incompatible types
-found   : net.sf.saxon.s9api.XdmNode
-required: java.lang.String
-		return out.getXdmNode();
-		                     ^
-1 error
