@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 
+use 5.010;
 use lib "lib";
 use XML::Saxon::XSLT2;
 
@@ -18,6 +19,7 @@ XML
 my $xslt = <<'XSLT';
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
+<xsl:output media-type="text/foo+xml" version="1.1" encoding="ascii" doctype-system="foo.dtd" indent="yes" />
 <xsl:param name="bar"/>
 <xsl:template match="/">
 <xsl:variable name="allauthors">
@@ -33,6 +35,18 @@ my $xslt = <<'XSLT';
 </xsl:stylesheet>
 XSLT
 
-my $transformation = XML::Saxon::XSLT2->new($xslt);
-$transformation->parameters('bar' => [date=>'2010-02-28']);
-print $transformation->transform($xml) . "\n";
+eval {
+	my $transformation = XML::Saxon::XSLT2->new($xslt);
+	$transformation->parameters('bar' => [date=>'2010-02-28']);
+	say $transformation->transform($xml);
+	say $transformation->media_type('text/xml');
+	say $transformation->doctype_public;
+	say $transformation->doctype_system;
+	say $transformation->version;
+	say $transformation->encoding;
+};
+if ($@)
+{
+	my $msg = $@;
+	warn $msg->printStackTrace;
+}

@@ -8,12 +8,15 @@ use IO::Handle;
 use Scalar::Util qw[blessed];
 use XML::LibXML;
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 my $classpath;
 
 BEGIN
 {
-	foreach my $path (qw(/usr/share/java/saxon9he.jar /usr/local/share/java/saxon9he.jar))
+	foreach my $path (qw(/usr/share/java/saxon9he.jar
+		/usr/local/share/java/saxon9he.jar
+		/usr/share/java/saxonb.jar
+		/usr/local/share/java/saxonb.jar))
 	{
 		$classpath = $path if -e $path;
 	}
@@ -87,7 +90,7 @@ sub parameters
 sub transform
 {
 	my ($self, $doc, $type) = @_;
-	$type = ($type =~ /^(text|html|xhtml|xml)$/i) ? (lc $type) : '';
+	$type = ($type =~ /^(text|html|xhtml|xml)$/i) ? (lc $type) : 'default';
 	$doc  = $self->_xml($doc);
 	return $self->{'transformer'}->transform($doc, $type);
 }
@@ -103,8 +106,38 @@ sub transform_document
 
 sub messages
 {
-	my $self = shift;
+	my ($self) = @_;
 	return @{ $self->{'transformer'}->messages };
+}
+
+sub media_type
+{
+	my ($self, $default) = @_;
+	return $self->{'transformer'}->media_type || $default;
+}
+
+sub doctype_public
+{
+	my ($self, $default) = @_;
+	return $self->{'transformer'}->doctype_public || $default;
+}
+
+sub doctype_system
+{
+	my ($self, $default) = @_;
+	return $self->{'transformer'}->doctype_system || $default;
+}
+
+sub version
+{
+	my ($self, $default) = @_;
+	return $self->{'transformer'}->version || $default;
+}
+
+sub encoding
+{
+	my ($self, $default) = @_;
+	return $self->{'transformer'}->encoding || $default;
 }
 
 sub _xml
@@ -218,6 +251,36 @@ This method is slower than C<transform>.
 Returns a list of string representations of messages output by
 E<lt>xsl:messageE<gt> during the last transformation run.
 
+=item C<< $trans->media_type($default) >>
+
+Returns the output media type for the transformation.
+
+If the transformation doesn't specify an output type, returns the default.
+
+=item C<< $trans->doctype_public($default) >>
+
+Returns the output DOCTYPE public identifier for the transformation.
+
+If the transformation doesn't specify a doctype, returns the default.
+
+=item C<< $trans->doctype_system($default) >>
+
+Returns the output DOCTYPE system identifier for the transformation.
+
+If the transformation doesn't specify a doctype, returns the default.
+
+=item C<< $trans->version($default) >>
+
+Returns the output XML version for the transformation.
+
+If the transformation doesn't specify a version, returns the default.
+
+=item C<< $trans->encoding($default) >>
+
+Returns the output encoding for the transformation.
+
+If the transformation doesn't specify an encoding, returns the default.
+
 =back
 
 =head1 BUGS
@@ -265,6 +328,7 @@ import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.transform.OutputKeys;
 import java.io.*;
 import java.math.BigDecimal;
 import java.net.URI;
@@ -373,6 +437,46 @@ public class Transformer
 	{
 		return messagelist.toArray();
 	}
+	
+	public String media_type ()
+	{
+		return xslt.getUnderlyingCompiledStylesheet().getOutputProperties().getProperty(OutputKeys.MEDIA_TYPE);
+	}
+
+	public String doctype_public ()
+	{
+		return xslt.getUnderlyingCompiledStylesheet().getOutputProperties().getProperty(OutputKeys.DOCTYPE_PUBLIC);
+	}
+
+	public String doctype_system ()
+	{
+		return xslt.getUnderlyingCompiledStylesheet().getOutputProperties().getProperty(OutputKeys.DOCTYPE_SYSTEM);
+	}
+
+	public String method ()
+	{
+		return xslt.getUnderlyingCompiledStylesheet().getOutputProperties().getProperty(OutputKeys.METHOD);
+	}
+
+	public String version ()
+	{
+		return xslt.getUnderlyingCompiledStylesheet().getOutputProperties().getProperty(OutputKeys.VERSION);
+	}
+
+	public String standalone ()
+	{
+		return xslt.getUnderlyingCompiledStylesheet().getOutputProperties().getProperty(OutputKeys.STANDALONE);
+	}
+
+	public String encoding ()
+	{
+		return xslt.getUnderlyingCompiledStylesheet().getOutputProperties().getProperty(OutputKeys.ENCODING);
+	}
+
+	public String indent ()
+	{
+		return xslt.getUnderlyingCompiledStylesheet().getOutputProperties().getProperty(OutputKeys.INDENT);
+	}
 
 	public String transform (String doc, String method)
 		throws SaxonApiException
@@ -389,7 +493,7 @@ public class Transformer
 		out.setOutputWriter(sw);
 		trans.setDestination(out);
 
-		if (method != "")
+		if (!method.equals("default"))
 		{
 			out.setOutputProperty(Serializer.Property.METHOD, method);
 		}
@@ -411,9 +515,9 @@ public class Transformer
 				}
 			}
 		);
-
-		trans.transform();
 		
+		trans.transform();
+				
 		return sw.toString();
 	}
 }

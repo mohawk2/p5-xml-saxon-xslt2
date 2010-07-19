@@ -70,6 +70,36 @@ DESCRIPTION
         Returns a list of string representations of messages output by
         <xsl:message> during the last transformation run.
 
+    "$trans->media_type($default)"
+        Returns the output media type for the transformation.
+
+        If the transformation doesn't specify an output type, returns the
+        default.
+
+    "$trans->doctype_public($default)"
+        Returns the output DOCTYPE public identifier for the transformation.
+
+        If the transformation doesn't specify a doctype, returns the
+        default.
+
+    "$trans->doctype_system($default)"
+        Returns the output DOCTYPE system identifier for the transformation.
+
+        If the transformation doesn't specify a doctype, returns the
+        default.
+
+    "$trans->version($default)"
+        Returns the output XML version for the transformation.
+
+        If the transformation doesn't specify a version, returns the
+        default.
+
+    "$trans->encoding($default)"
+        Returns the output encoding for the transformation.
+
+        If the transformation doesn't specify an encoding, returns the
+        default.
+
 BUGS
     Please report any bugs to <http://rt.cpan.org/>.
 

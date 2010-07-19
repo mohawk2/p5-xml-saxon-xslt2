@@ -41,6 +41,17 @@ my:v_0-002
 		dcs:item [ rdfs:label "No longer default to 'xml' output method, but respect XSLT's specified output method."@en ]
 		] .
 
+my:v_0-003
+
+	a               :Version ;
+	dc:issued       "2010-07-19"^^xsd:date ;
+	:revision       "0.003"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/XML-Saxon-XSLT2-0.003.tar.gz> ;
+	dcs:changeset [
+		dcs:versus my:v_0-002 ;
+		dcs:item [ rdfs:label "Can determine <xsl:output> media-type, doctype-public, doctype-system, encoding and version attributes."@en ; a dcs:Addition ]
+		] .
+
 #############################################################
 
 my:project
@@ -59,7 +70,7 @@ my:project
 	:tester         toby:i ;
 	:created        "2010-07-14"^^xsd:date ;
 	:license        <http://dev.perl.org/licenses/> ;
-	:release        my:v_0-001 , my:v_0-002 .
+	:release        my:v_0-001 , my:v_0-002 , my:v_0-003 .
 
 #############################################################
 
