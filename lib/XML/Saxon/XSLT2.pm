@@ -289,7 +289,7 @@ Please report any bugs to L<http://rt.cpan.org/>.
 
 =head1 SEE ALSO
 
-C<XML::LibXSLT> is probably more reliable, and allows you to define your
+L<XML::LibXSLT> is probably more reliable, and allows you to define your
 own XSLT extension functions. However, the libxslt library that it's based
 on only supports XSLT 1.0.
 
