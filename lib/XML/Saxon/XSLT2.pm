@@ -172,8 +172,18 @@ XML::Saxon::XSLT2 - process XSLT 2.0 using Saxon 9.x.
 
 =head1 SYNOPSIS
 
+ use XML::Saxon::XSLT2;
+ 
+ # make sure to open filehandle in right encoding
+ open(my $input, '<:encoding(UTF-8)', 'path/to/xml') or die $!;
+ open(my $xslt, '<:encoding(UTF-8)', 'path/to/xslt') or die $!;
+ 
  my $trans  = XML::Saxon::XSLT2->new($xslt, $baseurl);
  my $output = $trans->transform($input);
+ print $output;
+ 
+ my $output2 = $trans->transform_document($input);
+ my @paragraphs = $output2->getElementsByTagName('p');
 
 =head1 DESCRIPTION
 
