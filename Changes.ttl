@@ -52,6 +52,17 @@ my:v_0-003
 		dcs:item [ rdfs:label "Can determine <xsl:output> media-type, doctype-public, doctype-system, encoding and version attributes."@en ; a dcs:Addition ]
 		] .
 
+my:v_0-004
+
+	a               :Version ;
+	dc:issued       "2011-02-18"^^xsd:date ;
+	:revision       "0.004"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/XML-Saxon-XSLT2-0.004.tar.gz> ;
+	dcs:changeset [
+		dcs:versus my:v_0-003 ;
+		dcs:item [ rdfs:label "Allow parameters to be passed through to Inline::Java from the 'use' line."@en ; a dcs:Addition ]
+		] .
+
 #############################################################
 
 my:project
@@ -70,7 +81,7 @@ my:project
 	:tester         toby:i ;
 	:created        "2010-07-14"^^xsd:date ;
 	:license        <http://dev.perl.org/licenses/> ;
-	:release        my:v_0-001 , my:v_0-002 , my:v_0-003 .
+	:release        my:v_0-001 , my:v_0-002 , my:v_0-003 , my:v_0-004 .
 
 #############################################################
 

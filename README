@@ -2,8 +2,18 @@ NAME
     XML::Saxon::XSLT2 - process XSLT 2.0 using Saxon 9.x.
 
 SYNOPSIS
+     use XML::Saxon::XSLT2;
+ 
+     # make sure to open filehandle in right encoding
+     open(my $input, '<:encoding(UTF-8)', 'path/to/xml') or die $!;
+     open(my $xslt, '<:encoding(UTF-8)', 'path/to/xslt') or die $!;
+ 
      my $trans  = XML::Saxon::XSLT2->new($xslt, $baseurl);
      my $output = $trans->transform($input);
+     print $output;
+ 
+     my $output2 = $trans->transform_document($input);
+     my @paragraphs = $output2->getElementsByTagName('p');
 
 DESCRIPTION
     This module implements XSLT 1.0 and 2.0 using Saxon 9.x via
@@ -15,6 +25,14 @@ DESCRIPTION
     found at <http://saxon.sourceforge.net/> - just dowload the latest Java
     release of Saxon-HE 9.x, open the Zip archive, extract saxon9he.jar and
     save it to one of the two directories above.
+
+  Use Line
+     use XML::Saxon::XSLT2;
+
+    You can include additional parameters which will be passed straight on
+    to Inline::Java, like this:
+
+     use XML::Saxon::XSLT2 EXTRA_JAVA_ARGS => '-Xmx256m';
 
   Constructor
     "XML::Saxon::XSLT2->new($xslt, [$baseurl])"
@@ -104,15 +122,19 @@ BUGS
     Please report any bugs to <http://rt.cpan.org/>.
 
 SEE ALSO
-    "XML::LibXSLT" is probably more reliable, and allows you to define your
+    XML::LibXSLT is probably more reliable, and allows you to define your
     own XSLT extension functions. However, the libxslt library that it's
     based on only supports XSLT 1.0.
+
+    Inline::Java.
+
+    <http://saxon.sourceforge.net/>.
 
 AUTHOR
     Toby Inkster <tobyink@cpan.org>.
 
 COPYRIGHT
-    Copyright 2010 Toby Inkster
+    Copyright 2010-2011 Toby Inkster
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

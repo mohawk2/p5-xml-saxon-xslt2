@@ -1,5 +1,5 @@
-use Test::More tests => 5;
-BEGIN { use_ok('XML::Saxon::XSLT2') };
+use Test::More tests => 4;
+use XML::Saxon::XSLT2;
 
 my $xslt = <<'XSLT';
 <?xml version="1.0" encoding="UTF-8"?>
