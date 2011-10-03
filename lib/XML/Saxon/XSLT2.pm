@@ -8,17 +8,19 @@ use IO::Handle;
 use Scalar::Util qw[blessed];
 use XML::LibXML;
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 my $classpath;
 
 BEGIN
 {
-	foreach my $path (qw(/usr/share/java/saxon9he.jar
+	foreach my $path (qw(
+		/usr/share/java/saxon9he.jar
 		/usr/local/share/java/saxon9he.jar
 		/usr/share/java/saxonb.jar
 		/usr/local/share/java/saxonb.jar))
 	{
 		$classpath = $path if -e $path;
+		last if defined $classpath;
 	}
 
 	require Inline;

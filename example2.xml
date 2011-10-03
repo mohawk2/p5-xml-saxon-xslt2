@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<books>
-    <book name="Programming Ruby"
-      author="Dave Thomas"/>
-    <book name="Code Generation in Action"
-      author="Jack Herrington"/>
-    <book name="Pragmatic Programmer"
-      author="Dave Thomas"/>
-</books>

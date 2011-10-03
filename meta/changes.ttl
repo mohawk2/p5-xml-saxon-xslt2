@@ -1,6 +1,5 @@
-#############################################################
-
 @prefix :        <http://usefulinc.com/ns/doap#> .
+@prefix dbug:    <http://ontologi.es/doap-bugs#> .
 @prefix dcs:     <http://ontologi.es/doap-changeset#> .
 @prefix dc:      <http://purl.org/dc/terms/> .
 @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
@@ -9,27 +8,16 @@
 @prefix toby:    <http://tobyinkster.co.uk/#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
-#############################################################
-
-<>
-
-	dc:title         "Changes" ;
-	dc:description   "Revision history for Perl extension XML::Saxon::XSLT2."@en ;
-	dc:subject       my:project ;
-	dc:creator       toby:i .
-
-#############################################################
-
+my:project :release my:v_0-001 .
 my:v_0-001
-
 	a               :Version ;
 	dc:issued       "2010-07-15"^^xsd:date ;
 	:revision       "0.001"^^xsd:string ;
 	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/XML-Saxon-XSLT2-0.001.tar.gz> ;
 	rdfs:label      "Original version"@en .
 
+my:project :release my:v_0-002 .
 my:v_0-002
-
 	a               :Version ;
 	dc:issued       "2010-07-15"^^xsd:date ;
 	:revision       "0.002"^^xsd:string ;
@@ -41,8 +29,8 @@ my:v_0-002
 		dcs:item [ rdfs:label "No longer default to 'xml' output method, but respect XSLT's specified output method."@en ]
 		] .
 
+my:project :release my:v_0-003 .
 my:v_0-003
-
 	a               :Version ;
 	dc:issued       "2010-07-19"^^xsd:date ;
 	:revision       "0.003"^^xsd:string ;
@@ -52,8 +40,8 @@ my:v_0-003
 		dcs:item [ rdfs:label "Can determine <xsl:output> media-type, doctype-public, doctype-system, encoding and version attributes."@en ; a dcs:Addition ]
 		] .
 
+my:project :release my:v_0-004 .
 my:v_0-004
-
 	a               :Version ;
 	dc:issued       "2011-02-18"^^xsd:date ;
 	:revision       "0.004"^^xsd:string ;
@@ -63,35 +51,13 @@ my:v_0-004
 		dcs:item [ rdfs:label "Allow parameters to be passed through to Inline::Java from the 'use' line."@en ; a dcs:Addition ]
 		] .
 
-#############################################################
-
-my:project
-
-	a               :Project ;
-	:name           "XML-Saxon-XSLT2" ;
-	:shortdesc      "process XSLT 2.0 using Saxon 9.x"@en ;
-	:programming-language  "Perl" ;
-	:homepage       <https://metacpan.org/release/XML-Saxon-XSLT2> ;
-	:download-page  <https://metacpan.org/release/XML-Saxon-XSLT2> ;
-	:bug-database   <http://rt.cpan.org/Dist/Display.html?Queue=XML-Saxon-XSLT2> ;
-	:repository     [ a :SVNRepository ; :browse <http://goddamn.co.uk/svn-web/perlmods/browse/XML-Saxon-XSLT2/> ] ;
-	:maintainer     toby:i ;
-	:developer      toby:i ;
-	:documenter     toby:i ;
-	:tester         toby:i ;
-	:created        "2010-07-14"^^xsd:date ;
-	:license        <http://dev.perl.org/licenses/> ;
-	:release        my:v_0-001 , my:v_0-002 , my:v_0-003 , my:v_0-004 .
-
-#############################################################
-
-toby:i
-
-	a               foaf:Person ;
-	foaf:name       "Toby Inkster" ;
-	foaf:homepage   <http://tobyinkster.co.uk/> ;
-	foaf:page       <https://metacpan.org/author/TOBYINK> ;
-	foaf:mbox       <mailto:tobyink@cpan.org> ;
-	<http://www.w3.org/2002/07/owl#sameAs> <http://purl.org/NET/cpan-uri/person/tobyink> .
-
-#############################################################
+my:project :release my:v_0-005 .
+my:v_0-005
+	a               :Version ;
+	dc:issued       "2011-10-03"^^xsd:date ;
+	:revision       "0.005"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/XML-Saxon-XSLT2-0.005.tar.gz> ;
+	dcs:changeset [
+		dcs:versus my:v_0-004 ;
+		dcs:item [ rdfs:label "Change how $classpath is constructed."@en ; a dcs:Bugfix ; dcs:fixes [ dbug:id "66276" ; rdfs:label "Classpath is searched in wrong order" ] ]
+		] .
