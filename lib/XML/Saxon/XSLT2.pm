@@ -8,7 +8,7 @@ use IO::Handle;
 use Scalar::Util qw[blessed];
 use XML::LibXML;
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 my $classpath;
 
 BEGIN
@@ -262,16 +262,13 @@ Run a transformation, returning the output as a string.
 $doc may be a string, a file handle or an L<XML::LibXML::Document>.
 
 $output_method may be 'xml', 'xhtml', 'html' or 'text' to override
-the XSLT output method.
+the XSLT output method; or 'default' to use the output method specified
+in the XSLT file. 'default' is the default. In the current release,
+'default' is also broken. :-(
 
 =item C<< $trans->transform_document($doc, [$output_method]) >>
 
-Run a transformation, returning the output as an L<XML::LibXML::Document>.
-
-$doc may be a string, a file handle or an L<XML::LibXML::Document>.
-
-$output_method may be 'xml', 'xhtml', 'html' or 'text' to override
-the XSLT output method.
+As per <transform>, but returns the output as an L<XML::LibXML::Document>.
 
 This method is slower than C<transform>.
 

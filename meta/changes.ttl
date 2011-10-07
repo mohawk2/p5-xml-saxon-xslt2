@@ -61,3 +61,15 @@ my:v_0-005
 		dcs:versus my:v_0-004 ;
 		dcs:item [ rdfs:label "Change how $classpath is constructed."@en ; a dcs:Bugfix ; dcs:fixes [ dbug:id "66276" ; rdfs:label "Classpath is searched in wrong order" ] ]
 		] .
+
+my:project :release my:v_0-006 .
+my:v_0-006
+	a               :Version ;
+	dc:issued       "2011-10-06"^^xsd:date ;
+	:revision       "0.006"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Module-Install-RDF-0.006.tar.gz> ;
+	dcs:changeset [
+		dcs:versus my:v_0-005 ;
+		dcs:item   [ a dcs:Packaging ; rdfs:label "Upgrade Module::Package::RDF version."@en ] ;
+		dcs:item   [ a dcs:Documentation ; rdfs:label "Mention that the 'default' value for the output format of the 'transform' method is broken."@en ] 
+	] .
