@@ -1,0 +1,93 @@
+@prefix dbug: <http://ontologi.es/doap-bugs#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prio: <http://purl.org/NET/cpan-uri/rt/priority/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rt: <http://purl.org/NET/cpan-uri/rt/ticket/> .
+@prefix status: <http://purl.org/NET/cpan-uri/rt/status/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+_:r1347364015r0 a foaf:Agent ;
+	foaf:mbox <mailto:mauricemengel@gmail.com> .
+_:r1347364015r1 a foaf:Agent ;
+	foaf:nick "TOBYINK" .
+_:r1347364015r2 a foaf:Agent ;
+	foaf:nick "Nobody" .
+_:r1347364015r3 a foaf:Agent ;
+	foaf:mbox <mailto:quentin@mit.edu> .
+_:r1347364015r4 a foaf:Agent ;
+	foaf:mbox <mailto:mail@tobyinkster.co.uk> .
+<http://purl.org/NET/cpan-uri/dist/XML-Saxon-XSLT2/project> dbug:issue <http://purl.org/NET/cpan-uri/rt/ticket/60584>, <http://purl.org/NET/cpan-uri/rt/ticket/60589>, <http://purl.org/NET/cpan-uri/rt/ticket/60645>, <http://purl.org/NET/cpan-uri/rt/ticket/60646>, <http://purl.org/NET/cpan-uri/rt/ticket/60648>, <http://purl.org/NET/cpan-uri/rt/ticket/66276>, <http://purl.org/NET/cpan-uri/rt/ticket/66278>, <http://purl.org/NET/cpan-uri/rt/ticket/79463> .
+<http://purl.org/NET/cpan-uri/rt/ticket/60584> dbug:assignee _:r1347364015r1 ;
+	dbug:id "60584"^^xsd:string ;
+	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=60584> ;
+	dbug:reporter _:r1347364015r0 ;
+	dbug:status status:resolved ;
+	dc:created "2010-08-21T05:04:04"^^xsd:dateTime ;
+	dc:modified "2010-08-23T17:33:00"^^xsd:dateTime ;
+	a dbug:Issue ;
+	rdfs:label "mismatch Manifest" .
+<http://purl.org/NET/cpan-uri/rt/ticket/60589> dbug:assignee _:r1347364015r1 ;
+	dbug:id "60589"^^xsd:string ;
+	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=60589> ;
+	dbug:reporter _:r1347364015r0 ;
+	dbug:status status:resolved ;
+	dc:created "2010-08-21T14:24:06"^^xsd:dateTime ;
+	dc:modified "2011-02-18T23:20:58"^^xsd:dateTime ;
+	a dbug:Issue ;
+	rdfs:label "usage more explicit?" .
+<http://purl.org/NET/cpan-uri/rt/ticket/60645> dbug:assignee _:r1347364015r2 ;
+	dbug:id "60645"^^xsd:string ;
+	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=60645> ;
+	dbug:reporter _:r1347364015r0 ;
+	dbug:status status:rejected ;
+	dc:created "2010-08-23T17:32:51"^^xsd:dateTime ;
+	dc:modified "2011-02-18T22:47:26"^^xsd:dateTime ;
+	a dbug:Issue ;
+	rdfs:label "" .
+<http://purl.org/NET/cpan-uri/rt/ticket/60646> dbug:assignee _:r1347364015r1 ;
+	dbug:id "60646"^^xsd:string ;
+	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=60646> ;
+	dbug:reporter _:r1347364015r0 ;
+	dbug:status status:resolved ;
+	dc:created "2010-08-23T17:37:21"^^xsd:dateTime ;
+	dc:modified "2011-02-18T23:19:31"^^xsd:dateTime ;
+	a dbug:Issue ;
+	rdfs:label "variable memory requirements" .
+<http://purl.org/NET/cpan-uri/rt/ticket/60648> dbug:assignee _:r1347364015r2 ;
+	dbug:id "60648"^^xsd:string ;
+	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=60648> ;
+	dbug:reporter _:r1347364015r0 ;
+	dbug:status status:rejected ;
+	dc:created "2010-08-23T17:51:32"^^xsd:dateTime ;
+	dc:modified "2011-02-18T23:13:18"^^xsd:dateTime ;
+	a dbug:Issue ;
+	rdfs:label "measuring performance" .
+<http://purl.org/NET/cpan-uri/rt/ticket/66276> dbug:assignee _:r1347364015r1 ;
+	dbug:id "66276"^^xsd:string ;
+	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=66276> ;
+	dbug:reporter _:r1347364015r3 ;
+	dbug:status status:resolved ;
+	dc:created "2011-03-01T09:32:22"^^xsd:dateTime ;
+	dc:modified "2011-10-03T22:33:21"^^xsd:dateTime ;
+	a dbug:Issue ;
+	rdfs:label "Classpath is searched in wrong order" .
+<http://purl.org/NET/cpan-uri/rt/ticket/66278> dbug:assignee _:r1347364015r1 ;
+	dbug:id "66278"^^xsd:string ;
+	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=66278> ;
+	dbug:reporter _:r1347364015r3 ;
+	dbug:status status:open ;
+	dc:created "2011-03-01T10:46:58"^^xsd:dateTime ;
+	dc:modified "2011-10-03T21:47:56"^^xsd:dateTime ;
+	a dbug:Issue ;
+	rdfs:label "xsl:result-document element doesn't work" .
+<http://purl.org/NET/cpan-uri/rt/ticket/79463> dbug:assignee _:r1347364015r1 ;
+	dbug:id "79463"^^xsd:string ;
+	dbug:page <https://rt.cpan.org/Ticket/Display.html?id=79463> ;
+	dbug:reporter _:r1347364015r4 ;
+	dbug:status status:resolved ;
+	dc:created "2012-09-05T22:35:39"^^xsd:dateTime ;
+	dc:modified "2012-09-11T12:44:53"^^xsd:dateTime ;
+	a dbug:Issue ;
+	rdfs:label "Insufficient documentation - baseuri" .

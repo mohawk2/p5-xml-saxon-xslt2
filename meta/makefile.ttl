@@ -4,7 +4,7 @@
 	:perl_version_from _:main ;
 	:version_from _:main ;
 	:readme_from _:main ;
-	:requires "common::sense" , "Carp 1.00" , "Inline::Java" , "IO::Handle" , "Scalar::Util" , "XML::LibXML 1.60" ;
+	:requires "Inline::Java", "XML::LibXML 1.60" ;
 	:test_requires "Test::More 0.61" .
 
 _:main <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/XML/Saxon/XSLT2.pm" .

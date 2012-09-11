@@ -73,3 +73,17 @@ my:v_0-006
 		dcs:item   [ a dcs:Packaging ; rdfs:label "Upgrade Module::Package::RDF version."@en ] ;
 		dcs:item   [ a dcs:Documentation ; rdfs:label "Mention that the 'default' value for the output format of the 'transform' method is broken."@en ] 
 	] .
+
+my:project :release my:v_0-007 .
+my:v_0-007
+	a               :Version ;
+	dc:issued       "2012-09-11"^^xsd:date ;
+	:revision       "0.007"^^xsd:string ;
+	rdfs:label      "Shaken, not stirred"@en;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Module-Install-RDF-0.007.tar.gz> ;
+	dcs:changeset [
+		dcs:versus my:v_0-006 ;
+		dcs:item   [ a dcs:Packaging ; rdfs:label "Drop common::sense dependency."@en ] ;
+		dcs:item   [ a dcs:Documentation ; rdfs:label "Improve documentation of base URIs."@en; dcs:fixes <http://purl.org/NET/cpan-uri/rt/ticket/79463> ] ;
+		dcs:item   [ a dcs:Documentation ; rdfs:label "Improve documentation of import function."@en ] ;
+	] .

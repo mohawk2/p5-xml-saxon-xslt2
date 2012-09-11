@@ -1,14 +1,14 @@
 package XML::Saxon::XSLT2;
 
 use 5.008;
-use common::sense;
+use strict;
 
 use Carp;
 use IO::Handle;
 use Scalar::Util qw[blessed];
 use XML::LibXML;
 
-our $VERSION = '0.006';
+our $VERSION = '0.007';
 my $classpath;
 
 BEGIN
@@ -205,7 +205,7 @@ flexible. The saxon9he.jar file can be found at L<http://saxon.sourceforge.net/>
 just dowload the latest Java release of Saxon-HE 9.x, open the Zip archive,
 extract saxon9he.jar and save it to one of the two directories above.
 
-=head2 Use Line
+=head2 Import
 
  use XML::Saxon::XSLT2;
 
@@ -213,6 +213,9 @@ You can include additional parameters which will be passed straight on to
 Inline::Java, like this:
 
  use XML::Saxon::XSLT2 EXTRA_JAVA_ARGS => '-Xmx256m';
+
+The C<import> function I<must> be called. If you load this module without
+importing it, it will not work. (Don't worry, it won't pollute your namespace.)
 
 =head2 Constructor
 
@@ -223,7 +226,8 @@ Inline::Java, like this:
 Creates a new transformation. $xslt may be a string, a file handle or an
 L<XML::LibXML::Document>. $baseurl is an optional base URL for resolving
 relative URL references in, for instance, E<lt>xsl:importE<gt> links.
-Otherwise, the current directory is assumed to be the base.
+Otherwise, the current directory is assumed to be the base. (For base URIs
+which are filesystem directories, remember to include the trailing slash.)
 
 =back
 
@@ -244,12 +248,12 @@ or an arrayref where the first element is the type and the second the
 value. For example:
 
  $trans->parameters(
-    now           => DateTime->now,
+    now             => DateTime->now,
     madrid_is_capital_of_spain => [ boolean => 1 ],
-    price_of_fish => [ decimal => '1.99' ],
-    my_link       => URI->new('http://example.com/'),
-    your_link     => [ uri => 'http://example.net/' ],
-    );
+    price_of_fish   => [ decimal => '1.99' ],
+    my_link         => URI->new('http://example.com/'),
+    your_link       => [ uri => 'http://example.net/' ],
+ );
 
 The following types are supported via the arrayref notation: float, double,
 long (alias int, integer), decimal, bool (alias boolean), string, qname, uri,
@@ -264,7 +268,7 @@ $doc may be a string, a file handle or an L<XML::LibXML::Document>.
 $output_method may be 'xml', 'xhtml', 'html' or 'text' to override
 the XSLT output method; or 'default' to use the output method specified
 in the XSLT file. 'default' is the default. In the current release,
-'default' is also broken. :-(
+'default' is broken. :-(
 
 =item C<< $trans->transform_document($doc, [$output_method]) >>
 
@@ -315,11 +319,12 @@ Please report any bugs to L<http://rt.cpan.org/>.
 
 =head1 SEE ALSO
 
-L<XML::LibXSLT> is probably more reliable, and allows you to define your
-own XSLT extension functions. However, the libxslt library that it's based
-on only supports XSLT 1.0.
+L<XML::LibXSLT> is probably more reliable in terms of easy installation on a
+variety of platforms, and it allows you to define your own XSLT extension
+functions. However, the libxslt library that it's based on only supports XSLT
+1.0.
 
-L<Inline::Java>.
+This module uses L<Inline::Java>.
 
 L<http://saxon.sourceforge.net/>.
 
@@ -329,7 +334,7 @@ Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
 
 =head1 COPYRIGHT
 
-Copyright 2010-2011 Toby Inkster
+Copyright 2010-2012 Toby Inkster
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
