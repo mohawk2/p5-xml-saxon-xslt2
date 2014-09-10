@@ -8,7 +8,7 @@ use IO::Handle;
 use Scalar::Util qw[blessed];
 use XML::LibXML;
 
-our $VERSION = '0.007';
+our $VERSION = '0.008';
 my $classpath;
 
 BEGIN
