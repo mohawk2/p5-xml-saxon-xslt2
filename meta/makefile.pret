@@ -1,7 +1,0 @@
-@prefix deps:  <http://ontologi.es/doap-deps#> .
-
-<http://purl.org/NET/cpan-uri/dist/XML-Saxon-XSLT2/project>
-	deps:runtime-requirement         [ deps:on "Inline::Java"^^deps:CpanId ];
-	deps:runtime-requirement         [ deps:on "XML::LibXML 1.60"^^deps:CpanId ];
-	deps:test-requirement            [ deps:on "Test::More 0.61"^^deps:CpanId ].
-
