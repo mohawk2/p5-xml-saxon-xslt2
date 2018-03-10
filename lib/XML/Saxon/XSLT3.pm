@@ -7,25 +7,12 @@ use Carp;
 use IO::Handle;
 use Scalar::Util qw[blessed];
 use XML::LibXML;
+use Alien::Saxon;
+require Inline;
 
 our $VERSION = '0.008';
-my $classpath;
 
-BEGIN
-{
-	foreach my $path (qw(
-		/usr/share/java/saxon9he.jar
-		/usr/local/share/java/saxon9he.jar
-		/usr/share/java/saxonb.jar
-		/usr/local/share/java/saxonb.jar))
-	{
-		$classpath = $path if -e $path;
-		last if defined $classpath;
-	}
-
-	require Inline;
-}
-
+my $classpath = Alien::Saxon->jar;
 sub import
 {
 	my ($class, @args) = @_;
@@ -199,11 +186,7 @@ XML::Saxon::XSLT3 - process XSLT 3.0 using Saxon 9.x.
 
 This module implements XSLT up to 3.0 using Saxon 9.x via L<Inline::Java>.
 
-It expects Saxon to be installed in either '/usr/share/java/saxon9he.jar'
-or '/usr/local/share/java/saxon9he.jar'. Future versions should be more
-flexible. The saxon9he.jar file can be found at L<http://saxon.sourceforge.net/> -
-just dowload the latest Java release of Saxon-HE 9.x, open the Zip archive,
-extract saxon9he.jar and save it to one of the two directories above.
+It uses Saxon-HE for this, installed using L<Alien::Saxon>.
 
 =head2 Import
 
