@@ -506,7 +506,7 @@ public class Transformer
 		XsltTransformer trans = xslt.load();
 		trans.setInitialContextNode(source);
 
-		Serializer out = new Serializer();
+		Serializer out = proc.newSerializer();
 		StringWriter sw = new StringWriter();
 		out.setOutputWriter(sw);
 		trans.setDestination(out);
