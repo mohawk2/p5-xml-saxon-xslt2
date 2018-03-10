@@ -26,6 +26,7 @@ WriteMakefile(
     'Inline::Java' => 0,
     'XML::LibXML' => 0,
   },
+  clean => {FILES => "_Inline"},
   META_MERGE => {
     "meta-spec" => { version => 2 },
     resources => {
