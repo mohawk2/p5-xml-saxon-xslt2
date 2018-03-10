@@ -1,5 +1,5 @@
 use Test::More tests => 4;
-use XML::Saxon::XSLT2;
+use XML::Saxon::XSLT3;
 
 my $xslt = <<'XSLT';
 <?xml version="1.0" encoding="UTF-8"?>
@@ -31,7 +31,7 @@ my $input = <<'XML';
 </books>
 XML
 
-my $transformation = XML::Saxon::XSLT2->new($xslt);
+my $transformation = XML::Saxon::XSLT3->new($xslt);
 $transformation->parameters('bar' => [date=>'2010-02-28']);
 my $output = $transformation->transform_document($input, 'xml');
 

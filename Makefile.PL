@@ -6,8 +6,8 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-  NAME => 'XML::Saxon::XSLT2',
-  VERSION_FROM => 'lib/XML/Saxon/XSLT2.pm',
+  NAME => 'XML::Saxon::XSLT3',
+  VERSION_FROM => 'lib/XML/Saxon/XSLT3.pm',
   MIN_PERL_VERSION => '5.008',
   CONFIGURE_REQUIRES => {
     'Alien::Saxon' => '0',

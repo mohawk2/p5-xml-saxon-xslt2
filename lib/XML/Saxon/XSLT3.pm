@@ -1,4 +1,4 @@
-package XML::Saxon::XSLT2;
+package XML::Saxon::XSLT3;
 
 use 5.008;
 use strict;
@@ -41,11 +41,11 @@ sub new
 	
 	if ($baseurl)
 	{
-		return bless { 'transformer' => XML::Saxon::XSLT2::Transformer->new($xslt, $baseurl) }, $class;
+		return bless { 'transformer' => XML::Saxon::XSLT3::Transformer->new($xslt, $baseurl) }, $class;
 	}
 	else
 	{
-		return bless { 'transformer' => XML::Saxon::XSLT2::Transformer->new($xslt) }, $class;
+		return bless { 'transformer' => XML::Saxon::XSLT3::Transformer->new($xslt) }, $class;
 	}
 }
 
@@ -178,17 +178,17 @@ sub _xml
 
 =head1 NAME
 
-XML::Saxon::XSLT2 - process XSLT 2.0 using Saxon 9.x.
+XML::Saxon::XSLT3 - process XSLT 3.0 using Saxon 9.x.
 
 =head1 SYNOPSIS
 
- use XML::Saxon::XSLT2;
+ use XML::Saxon::XSLT3;
  
  # make sure to open filehandle in right encoding
  open(my $input, '<:encoding(UTF-8)', 'path/to/xml') or die $!;
  open(my $xslt, '<:encoding(UTF-8)', 'path/to/xslt') or die $!;
  
- my $trans  = XML::Saxon::XSLT2->new($xslt, $baseurl);
+ my $trans  = XML::Saxon::XSLT3->new($xslt, $baseurl);
  my $output = $trans->transform($input);
  print $output;
  
@@ -197,7 +197,7 @@ XML::Saxon::XSLT2 - process XSLT 2.0 using Saxon 9.x.
 
 =head1 DESCRIPTION
 
-This module implements XSLT 1.0 and 2.0 using Saxon 9.x via L<Inline::Java>.
+This module implements XSLT up to 3.0 using Saxon 9.x via L<Inline::Java>.
 
 It expects Saxon to be installed in either '/usr/share/java/saxon9he.jar'
 or '/usr/local/share/java/saxon9he.jar'. Future versions should be more
@@ -207,12 +207,12 @@ extract saxon9he.jar and save it to one of the two directories above.
 
 =head2 Import
 
- use XML::Saxon::XSLT2;
+ use XML::Saxon::XSLT3;
 
 You can include additional parameters which will be passed straight on to
 Inline::Java, like this:
 
- use XML::Saxon::XSLT2 EXTRA_JAVA_ARGS => '-Xmx256m';
+ use XML::Saxon::XSLT3 EXTRA_JAVA_ARGS => '-Xmx256m';
 
 The C<import> function I<must> be called. If you load this module without
 importing it, it will not work. (Don't worry, it won't pollute your namespace.)
@@ -221,7 +221,7 @@ importing it, it will not work. (Don't worry, it won't pollute your namespace.)
 
 =over 4
 
-=item C<< XML::Saxon::XSLT2->new($xslt, [$baseurl]) >>
+=item C<< XML::Saxon::XSLT3->new($xslt, [$baseurl]) >>
 
 Creates a new transformation. $xslt may be a string, a file handle or an
 L<XML::LibXML::Document>. $baseurl is an optional base URL for resolving
