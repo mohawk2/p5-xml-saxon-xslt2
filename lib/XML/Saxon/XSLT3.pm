@@ -357,7 +357,7 @@ public class Transformer
 	private XsltExecutable xslt;
 	private Processor proc;
 	private HashMap<String, XdmAtomicValue> params;
-	public List messagelist;
+	public List<String> messagelist;
 
 	public Transformer (String stylesheet)
 		throws SaxonApiException
@@ -366,7 +366,7 @@ public class Transformer
 		XsltCompiler comp = proc.newXsltCompiler();
 		xslt = comp.compile(new StreamSource(new StringReader(stylesheet)));
 		params = new HashMap<String, XdmAtomicValue>();
-		messagelist = new ArrayList();
+		messagelist = new ArrayList<String>();
 	}
 	
 	public Transformer (String stylesheet, String baseuri)
@@ -376,7 +376,7 @@ public class Transformer
 		XsltCompiler comp = proc.newXsltCompiler();
 		xslt = comp.compile(new StreamSource(new StringReader(stylesheet), baseuri));
 		params = new HashMap<String, XdmAtomicValue>();
-		messagelist = new ArrayList();
+		messagelist = new ArrayList<String>();
 	}
 	
 	public void paramAddString (String key, String value)
