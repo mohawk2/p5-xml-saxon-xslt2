@@ -10,7 +10,7 @@ use XML::LibXML;
 use Alien::Saxon;
 require Inline;
 
-our $VERSION = '0.008';
+our $VERSION = '0.009';
 
 my $classpath = Alien::Saxon->jar;
 sub import
