@@ -315,6 +315,9 @@ L<http://saxon.sourceforge.net/>.
 
 Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
 
+Updated to Saxon 9.8, to use L<Alien::Saxon>, and released as
+C<XML::Saxon::XSLT3> by Ed J.
+
 =head1 COPYRIGHT
 
 Copyright 2010-2012 Toby Inkster
