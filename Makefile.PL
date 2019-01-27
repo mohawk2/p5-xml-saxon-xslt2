@@ -9,6 +9,7 @@ WriteMakefile(
   NAME => 'XML::Saxon::XSLT3',
   VERSION_FROM => 'lib/XML/Saxon/XSLT3.pm',
   MIN_PERL_VERSION => '5.008',
+  LICENSE => 'perl_5',
   CONFIGURE_REQUIRES => {
     'Alien::Saxon' => '0',
   },
